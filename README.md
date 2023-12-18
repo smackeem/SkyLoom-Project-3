@@ -19,7 +19,7 @@
 </details>
 
 ## About The Project
-SkyLoom is a simple and intuitive Flight Price Tracker application that helps users monitor and receive alerts for changes in flight prices. Whether you're a budget-conscious traveler or planning your dream vacation, FlySaver keeps you informed, saving you time and money.
+SkyLoom is a seamless and intuitive Flight Price Tracker application that helps users monitor and receive alerts for changes in flight prices. Whether you're a budget-conscious traveler or planning your dream vacation, FlySaver keeps you informed, saving you time and money.
 
 ## Screenshots and Wireframe
 
