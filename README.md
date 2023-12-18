@@ -1,14 +1,6 @@
 <a name="readme-top"></a>
 
-[contributors-shield]: https://img.shields.io/badge/contributors-_3-green?style=for-the-badge
-[pulse-shield]: https://img.shields.io/badge/pulse-_%E2%9C%94-green?style=for-the-badge
-
-<br />
 <div align="center">
-    
-  [![Pulse][pulse-shield]][pulse-url]
-  [![Contributors][contributors-shield]][contributors-url]
-
 <h1>SkyLoom: Flight Price Tracker</h1>
 </div>
 
@@ -36,15 +28,7 @@ SkyLoom is a simple and intuitive Flight Price Tracker application that helps us
 <ul>
   <li>Frontend: Built with React for a responsive and interactive user interface.</li>
   <li>Backend: Powered by Node.js and Express, with data stored in MongoDB.</li>
-
 </ul>
-![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
-![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
-![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
-![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
-![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
-![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
-
 
 
 ## Getting Started
@@ -63,7 +47,11 @@ SkyLoom is a simple and intuitive Flight Price Tracker application that helps us
 </ul>
    
 ## Next Steps and Future Enhancements
-
+<ul>
+    <li>User Preferences: Allow users to customize their experience by setting preferences such as preferred airlines and layover durations.</li>
+    <li>User Assistance: Allow users to access helpful information or FAQs about using the Flight Price Tracker.</li>
+    <li>Real-Time Notifications: Send users real-time notifications when a tracked flight's price drops below set threshold.</li>
+</ul>
 
 ## Contact
 Ackeem Smith </br>
