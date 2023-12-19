@@ -13,3 +13,14 @@ export async function createDB(data){
         throw new Error("Invalid Request");
       }
 }
+
+export async function index() {
+    const res = await fetch(config.DB_URL, { method: "GET" });
+    if (res.ok) {
+      return res.json();
+    } else {
+      throw new Error("Invalid Request");
+    }
+  }
+
+
