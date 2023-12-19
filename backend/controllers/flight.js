@@ -13,3 +13,11 @@ async function index(req, res, next){
         res.status(400).json({err: err.message});
     }
 }
+
+async function create(req, res, next){
+    try{
+        res.status(200).json(await Flight.create(req.body));
+    }catch(err){
+        res.status(400).json({err: err.message})
+    }
+}
