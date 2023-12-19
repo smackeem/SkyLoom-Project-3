@@ -23,4 +23,14 @@ export async function index() {
     }
   }
 
-
+  export async function destroy(id){
+    try{
+      const url = `${config.DB_URL}/${id}`;
+      const res = await fetch(url, {method: "DELETE"});
+      if(res.ok){
+        return res.json();
+      }
+    }catch(err){
+      throw new Error("Invalid Request")
+    }
+  }
