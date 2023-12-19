@@ -21,3 +21,11 @@ async function create(req, res, next){
         res.status(400).json({err: err.message})
     }
 }
+
+async function destroy(req, res, next){
+    try{
+        res.status(200).json(await Flight.findByIdAndDelete(req.params.id));
+    }catch(err){
+        res.status(400).json({err: err.message})
+    }
+}
