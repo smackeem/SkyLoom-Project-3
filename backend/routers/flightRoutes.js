@@ -1,4 +1,6 @@
 const express = require('express');
 const router = express.Router();
 
-// const Flight = require('../controllers/flight');
+const flightCtrl = require('../controllers/flight');
+
+router.get('/', flightCtrl.index);
