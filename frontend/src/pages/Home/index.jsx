@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { getFlights, getRoundTrips, getOneWayFlights } from "../../utilities/flight-service";
+import { getRoundTrips, getOneWayFlights } from "../../utilities/flight-service";
+import Flights from "../Flights";
 
 const Home = () => {
     const [isRoundTrip, setIsRoundTrip] = useState(false);
@@ -8,13 +9,14 @@ const Home = () => {
         originLocationCode: '',
         destinationLocationCode: '',
         departureDate: '',
+        returnDate: '',
         adults: '',
         max: 25
     });
-    // const [flightData, setFlightData] = useState([])
+    const [flightData, setFlightData] = useState([])
 
-    // const handleRequest = async () => {
-    //     const data = await getOneWayFlights();
+    // const handleRequest = () => {
+    //     setFlightData()
     //     // if (data.ok) {
     //         console.log(data)
     //     // }
@@ -24,29 +26,36 @@ const Home = () => {
     //     handleRequest()
     // }, []);
     const handleRoundTripClick = () => {
-        setIsRoundTrip(!isRoundTrip); // Toggle Round-Trip state
+        setIsRoundTrip(!isRoundTrip);
+        
     };
 
     const handleNotRoundTrip = () => {
-        setIsRoundTrip(!isRoundTrip); // Toggle Round-Trip state
+        setIsRoundTrip(!isRoundTrip); 
+
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            //console.log(formData)
-            const flights = isRoundTrip ? await getRoundTrips(formData) : await getOneWayFlights(formData);
-            console.log('fetch', flights.data)
+            let flights
+            if(isRoundTrip){
+                flights = await getRoundTrips(formData)
+            }else{
+                flights = await getOneWayFlights(formData)
+            }
+            console.log('fetch', flights)
+            setFlightData(flights)
         } catch (err) {
             console.log(err)
         }
-        setFormData({
-            originLocationCode: '',
-            destinationLocationCode: '',
-            departureDate: '',
-            adults: '',
-            max: 25
-        })
+        // setFormData({
+        //     originLocationCode: '',
+        //     destinationLocationCode: '',
+        //     departureDate: '',
+        //     adults: '',
+        //     max: 25
+        // })
     }
 
     const handleChange = (e) => {
@@ -91,6 +100,7 @@ const Home = () => {
                         <button type="submit" >Find Flights</button>
                     </form>
                 </div>
+                <div><Flights allFlights={flightData} /> </div>
             </div>
 
 

@@ -57,7 +57,7 @@ router.post("/oneWay", getToken, async (req, res, next)=>{
 
 router.post("/roundTrip", getToken, async (req, res, next)=>{
     try{
-        console.log(token)
+        //console.log(token)
         const {originLocationCode, destinationLocationCode, departureDate, returnDate, adults, max} = req.body
         const url = `https://test.api.amadeus.com/v2/shopping/flight-offers?originLocationCode=${originLocationCode}&destinationLocationCode=${destinationLocationCode}&departureDate=${departureDate}&returnDate=${returnDate}&adults=${adults}&nonStop=false&max=${max}`
         const response = await fetch(url, {
