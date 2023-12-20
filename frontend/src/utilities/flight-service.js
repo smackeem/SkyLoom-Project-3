@@ -48,6 +48,8 @@ export async function getOneWayFlights(data){
         console.log('service', oneWayflights)
         if(oneWayflights.data){
             const processData = processFlights(oneWayflights)
+            console.log('.data', oneWayflights.data)
+            console.log('processed', processData)
             return processData
         }
     }catch(err){
@@ -61,6 +63,8 @@ export async function getRoundTrips(data){
         console.log('service', roundTrips)
         if(roundTrips.data){
             const processData = processFlights(roundTrips)
+            console.log('.data', roundTrips.data)
+            console.log('processed', processData)
             return processData
         }
     }catch(err){
@@ -74,6 +78,7 @@ export async function getPricing(data){
         console.log('service', pricing)
         if(pricing.data){
             const processData = processFlights(pricing)
+            
             return processData
         }
     }catch(err){
