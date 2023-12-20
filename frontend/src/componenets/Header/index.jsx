@@ -1,7 +1,10 @@
+import { Link } from "react-router-dom";
+
 const Header = () => {
     return (
-        <nav>
-            <h1>Nav Bar</h1>
+        <nav className="navbar navbar-dark bg-dark sticky-top">
+            <a className="navbar-brand" href="#">SkyLoom</a>
+            <Link  to="/tracker">Tracker</Link>
         </nav>
     )
 }
