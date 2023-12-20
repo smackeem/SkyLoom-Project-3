@@ -2,7 +2,11 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const FlightSchema = new Schema({
-    user: { type: Schema.Types.ObjectId, ref: "User" },
+    user: { 
+        sub: String,
+        name: String,
+        email: String,
+     },
     price: String,
     segments: [{
         departureDateTime: String,
