@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { getPricing } from "../../utilities/flight-service";
 
 const Flights = ({ allFlights }) => {
     const [airline, setAirline] = useState('')
@@ -11,10 +12,22 @@ const Flights = ({ allFlights }) => {
       useEffect(() => {
         fetchData()
       }, [])
+
+      const handleClick = async(e) =>{
+        try{
+            const pricingData = await getPricing(allFlights);
+            console.log(pricingData)
+        }catch(err){
+            console.log(err)
+        }
+      }
       let bool;
     return (
         <div className="d-flex m-3 flex-column">
             <h1>Flights</h1>
+            <div>
+            <button type="button" onClick={handleClick} className="btn btn-primary btn-lg btn-block">Get Cheapest of the List</button>
+            </div>
             <div>
                 {allFlights.map((flight, idx) => (
                     <div key={idx} className="d-flex p-5 m-2 align-items-start flex-column rounded border ">

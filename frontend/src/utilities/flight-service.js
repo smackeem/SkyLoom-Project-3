@@ -41,17 +41,6 @@ const processFlights = (apiResponse) => {
     return processedFlights;
 };
 
-export async function getFlights(){
-    try{
-        const flightInfo = await flightAPI.lookUpFlight()
-        console.log('service', flightInfo)
-        if(flightInfo.ok){
-            return flightInfo.json()
-        }
-    }catch(err){
-        return err
-    }
-}
 
 export async function getOneWayFlights(data){
     try{
@@ -79,3 +68,15 @@ export async function getRoundTrips(data){
     }
 }
 
+export async function getPricing(data){
+    try{
+        const pricing = await flightAPI.getPricingData(data)
+        console.log('service', pricing)
+        if(pricing.data){
+            const processData = processFlights(pricing)
+            return processData
+        }
+    }catch(err){
+        return err
+    }
+}

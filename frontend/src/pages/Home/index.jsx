@@ -100,9 +100,9 @@ const Home = () => {
                         <button type="submit" >Find Flights</button>
                     </form>
                 </div>
-                <div><Flights allFlights={flightData} /> </div>
+                
             </div>
-
+            <div className="card m-3 text-center"><Flights allFlights={flightData} /> </div>
 
         </div>
     )
