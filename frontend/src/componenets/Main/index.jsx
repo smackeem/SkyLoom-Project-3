@@ -1,7 +1,6 @@
 import { Routes, Route } from "react-router";
 import Home from "../../pages/Home";
-import Flights from "../../pages/Flights";
-import FlightTracker from "../../pages/Filtered";
+import SavedFlights from "../../pages/SavedFlights";
 import Profile from "../../pages/Profile";
 
 const Main = () => {
@@ -9,9 +8,9 @@ const Main = () => {
         <main>
             <Routes>
                 <Route path="/" element={<Home />}/>
-                <Route path="/flights" element={<Flights />}/>
-                <Route path="/tracker" element={<FlightTracker />}/>
+                <Route path="/saved" element={<SavedFlights />}/>
                 <Route path="/profile" element={<Profile />}/>
+                <Route path="*" element={<Profile />}/>
             </Routes>
         </main>
     )

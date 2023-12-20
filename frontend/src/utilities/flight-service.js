@@ -85,3 +85,36 @@ export async function getPricing(data){
         return err
     }
 }
+
+export async function addToDB(data, token){
+    try{
+        console.log('data being passed',data)
+        const newFlight = await flightAPI.createDB(data, token)
+        return newFlight;
+      }catch(err){
+      console.log(err)
+      return err;
+      }
+}
+
+export async function getSaved(data, token){
+    try{
+        console.log('data being passed',data)
+        const savedFlights = await flightAPI.saved(data, token)
+        return savedFlights;
+      }catch(err){
+      console.log(err)
+      return err;
+      }
+}
+
+export async function removeSaved(id, token){
+    try{
+        console.log('data being passed',id)
+        const destroyed = await flightAPI.destroy(id, token)
+        return destroyed;
+      }catch(err){
+      console.log(err)
+      return err;
+      }
+}

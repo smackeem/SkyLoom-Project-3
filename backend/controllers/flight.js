@@ -8,7 +8,7 @@ module.exports = {
 
 async function index(req, res, next){
     try{
-        const userId = req.params
+        const userId = req.headers.user
         console.log(userId)
         res.status(200).json(await Flight.find({'user.email': userId}));
     }catch(err){

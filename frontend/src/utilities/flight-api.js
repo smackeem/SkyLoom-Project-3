@@ -40,16 +40,39 @@ export async function getPricingData(data){
     throw new Error("Invalid Request");
   }
 }
+export async function createDB(data, token){
+        const res = await fetch(`${config.DB_URL}/flights`, {
+          method: "POST",
+          headers: {'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`},
+          body: JSON.stringify(data)});
+        if(res.ok){
+          return res.json();
+        }else{
+        throw new Error("Invalid Request");
+      }
+}
 
-  export async function destroy(id){
-    try{
-      const url = `${config.DB_URL}/${id}`;
-      const res = await fetch(url, {method: "DELETE"});
+  export async function destroy(id, token){
+      const url = `${config.DB_URL}/flights/${id}`;
+      const res = await fetch(url, {method: "DELETE",
+      headers: {'Authorization': `Bearer ${token}`}});
       if(res.ok){
         return res.json();
-      }
-    }catch(err){
+      }else{
       throw new Error("Invalid Request")
     }
   }
 
+  export async function saved(email, token){
+    const url = `${config.DB_URL}/flights/saved`;
+    const res = await fetch(url, {
+        method: "GET",
+        headers: {'Authorization': `Bearer ${token}`,
+        'User': email}});
+    if(res.ok){
+      return res.json();
+    }else{
+    throw new Error("Invalid Request")
+  }
+}

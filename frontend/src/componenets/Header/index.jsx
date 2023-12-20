@@ -9,13 +9,13 @@ const Header = () => {
         <nav className="navbar navbar-dark bg-dark sticky-top">
             <Link className="navbar-brand" to="/">SkyLoom</Link>
             
-            <Link to="/flights">Saved Flights</Link>
-            <Link  to="/tracker">Tracker</Link>
+            
             <div>
         {/* A nested ternary can conditionally render multiple states */}
         {!isLoading ? (
           isAuthenticated ? (
             <span>
+                <Link to="/saved">Saved Flights</Link>
               <Link to="/profile">Profile</Link> || <LogoutButton />
             </span>
           ) : (

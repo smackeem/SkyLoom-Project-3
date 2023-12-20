@@ -7,7 +7,10 @@ const Auth0ProviderWithNavigate = ({children}) => {
   const domain = config.DOMAIN
   const clientid = config.CLIENTID
   const callbackUrl = config.CALLBACK_URL
-  if (!(domain && clientid && callbackUrl)) {
+
+  const audience = config.AUTH0_AUDIENCE;
+
+  if (!(domain && clientid && callbackUrl, audience)) {
     return null;
   }
   
@@ -22,7 +25,7 @@ const Auth0ProviderWithNavigate = ({children}) => {
     <Auth0Provider
       domain={domain}
       clientId={clientid}
-      authorizationParams={{ redirect_uri: callbackUrl}}
+      authorizationParams={{ redirect_uri: callbackUrl, audience}}
       onRedirectCallback={onRedirectCallback}
     >
       {children}
