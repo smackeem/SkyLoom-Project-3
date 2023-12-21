@@ -1,4 +1,4 @@
-const Flight = require('../models/trackedFlight');
+const Flight = require('../models/flight');
 
 module.exports = {
     create,
