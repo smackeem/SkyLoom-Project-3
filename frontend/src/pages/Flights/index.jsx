@@ -2,13 +2,15 @@ import { useState, useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react"
 import { convertHM, convertIATACode } from "../../utilities/flight-service";
 import { addToDB, getSaved } from "../../utilities/flight-service";
+import FlightItem from "./FlightItem";
+import {RotatingLines} from "react-loader-spinner";
 
-const Flights = ({ allFlights }) => {
-    const [airline, setAirline] = useState([])
+
+const Flights = ({ allFlights, status, tripStat }) => {
+    // const [airline, setAirline] = useState([])
     const [savedFlights, setSavedFlights] = useState([]);
-    const { isLoading: loadingAuth, isAuthenticated, user, getAccessTokenSilently, loginWithRedirect } = useAuth0()
+    const { isLoading: loadingAuth, isAuthenticated, user, getAccessTokenSilently, loginWithPopup } = useAuth0()
     const [token, setToken] = useState()
-    const [saved, setSaved] = useState(false);
 
     useEffect(() => {
         const getUserToken = async () => {
@@ -23,68 +25,59 @@ const Flights = ({ allFlights }) => {
         isAuthenticated && getUserToken();
     }, [user?.sub]);
 
-    const fetchData = async () => {
-        const response = await fetch('/airlines.json');
-        const data = await response.json()
-        setAirline(data)
-    }
+    // const fetchData = async () => {
+    //     const response = await fetch('/airlines.json');
+    //     const data = await response.json()
+    //     setAirline(data)
+    // }
 
-    useEffect(() => {
-        fetchData()
-    }, [])
-
-    const savedf = async (f) => {
-        if (savedFlights.includes(f)) {
-            return true
-        }
-    }
+    // useEffect(() => {
+    //     fetchData()
+    // }, [])
 
     const handleSaveTrip = async (flight) => {
         if (!isAuthenticated) {
-            loginWithRedirect();
+            loginWithPopup();
             return;
         }
         console.log(flight)
-        const data = { ...flight, user: user }
-        const flightData = await addToDB(data, token)
-        console.log(flightData)
-        if (!savedFlights.includes(flight)) {
+        if (notSaved(flight)) {
             setSavedFlights([...savedFlights, flight]);
+            const data = { ...flight, user: user }
+            const flightData = await addToDB(data, token)
+            console.log('flight',flightData)
+        }else{
+            console.log('already addded');
         }
-        console.log('saved', savedFlights)
     };
-    let bool;
-    return (
 
-        <div className="d-flex mt-3 flex-column ">
+    // function connectingOrNonstop(data){
+    //     (tripStat && data.segments > 2) ? true : false
+   
+    //     (!tripStat && data.segment > 1){
+    //         return true
+    //     }
+    // }
+
+    function notSaved(data){
+        return !savedFlights.includes(data)
+    }
+
+    const loaded = () => {
+        return(
+            <div className="d-flex mt-3 flex-column ">
             {allFlights.map((flight, idx) => (
-                <div key={idx} className="card mt-3 border border-dark">
-                    {bool = flight.segments.length > 1 ? true : false}
-                    <div className="card-header d-flex justify-content-between">
-                        <div>
-                            <span className="h1">${flight.price} </span>
-                            <small className="text-muted card-text">per traveler</small>
-                        </div>
-                        <button onClick={() => handleSaveTrip(flight)} className={`btn btn-success ${savedf(flight) ? '' : 'disabled'}`}>Save Trip</button>
-                    </div>
-                    <div className="card-body container-fluid">
-                        <h5 className="card-title"> {airline[flight.validatingAirlineCodes.join(', ')]}</h5>
-                        {/* <p className="text-muted">{bool ? 'Connecting': 'Non-Stop' }</p> */}
-                        {flight.segments.map((segment, sIdx) => (
-                            <div key={sIdx} className="d-flex m-2 rounded border tk-color ">
-                                <section className="container-fluid">
-                                    <div className="d-flex justify-content-between">
-                                        <span>{new Date(segment.departureDateTime).toLocaleString()}</span>
-                                        <span>{convertHM(segment.duration)}</span>
-                                    </div>
-                                    <p className="text-center">{convertIATACode(segment.originLocation.cityCode)} - {convertIATACode(segment.destinationLocation.cityCode)}</p>
-                                </section>
-                            </div>
-                        ))}
-                    </div>
-                </div>
+               <FlightItem key={idx} flight={flight} handleSaveTrip={handleSaveTrip} notSaved={notSaved} />
             ))}
         </div>
+        )
+    }
+    return (
+        <>
+        {status ?  <RotatingLines visible={true} height="96" width="96" color="grey" ariaLabel="rotating-lines-loading" wrapperStyle={{}} wrapperClass=""/> : loaded()
+     }
+        </>
+        
     )
 }
 

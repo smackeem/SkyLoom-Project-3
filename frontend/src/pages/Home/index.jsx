@@ -7,6 +7,7 @@ import LocationIcon from '../../assets/images/location.png'
 
 const Home = () => {
     const [isRoundTrip, setIsRoundTrip] = useState(false);
+    const [isLoading, setIsloading] = useState(false)
     const [formData, setFormData] = useState({
         originLocationCode: '',
         destinationLocationCode: '',
@@ -19,16 +20,7 @@ const Home = () => {
 
     const [flightData, setFlightData] = useState([])
     const today = formatDateTime();
-    // const handleRequest = () => {
-    //     setFlightData()
-    //     // if (data.ok) {
-    //         console.log(data)
-    //     // }
-    // }
 
-    // useEffect(() => {
-    //     handleRequest()
-    // }, []);
     const handleRoundTripClick = () => {
         setIsRoundTrip(!isRoundTrip);
 
@@ -41,6 +33,7 @@ const Home = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setIsloading(true)
         try {
             let flights
             if (isRoundTrip) {
@@ -50,16 +43,10 @@ const Home = () => {
             }
             console.log('fetch', flights)
             setFlightData(flights)
+            setIsloading(false)
         } catch (err) {
             console.log(err)
         }
-        // setFormData({
-        //     originLocationCode: '',
-        //     destinationLocationCode: '',
-        //     departureDate: '',
-        //     adults: '',
-        //     max: 25
-        // })
     }
 
     const handleChange = (e) => {
@@ -120,7 +107,7 @@ const Home = () => {
                 </div>
 
             </div>
-            <Flights allFlights={flightData} />
+            <Flights allFlights={flightData} status={isLoading} tripStat={isRoundTrip}/>
 
         </div>
     )
