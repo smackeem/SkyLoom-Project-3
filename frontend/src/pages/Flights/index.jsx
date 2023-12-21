@@ -6,7 +6,7 @@ import { addToDB } from "../../utilities/flight-service";
 const Flights = ({ allFlights }) => {
     const [airline, setAirline] = useState([])
     const [savedFlights, setSavedFlights] = useState([]);
-    const { isLoading: loadingAuth, isAuthenticated, user, getAccessTokenSilently } = useAuth0()
+    const { isLoading: loadingAuth, isAuthenticated, user, getAccessTokenSilently, loginWithRedirect } = useAuth0()
     const [token, setToken] = useState()
     const [saved, setSaved] = useState(false);
   
@@ -40,7 +40,10 @@ const Flights = ({ allFlights }) => {
       }
 
       const handleSaveTrip = async(flight) => {
-        // Check if the flight is not already saved
+        if(!isAuthenticated){
+            loginWithRedirect();
+            return;
+        }
         console.log(flight)
         const data = { ...flight, user: user}
         const flightData = await addToDB(data, token)
@@ -53,23 +56,29 @@ const Flights = ({ allFlights }) => {
       let bool;
     return (
         
-            <div className="d-flex m-3 flex-column">
+            <div className="d-flex mt-3 flex-column">
                 {allFlights.map((flight, idx) => (
-                    <div key={idx} className="card ">
+                    <div key={idx} className="card mt-3">
                         { bool = flight.segments.length > 1 ? true : false}
-                        <div className="card-header">
-                        <span className="h1">${flight.price}</span>
+                        <div className="card-header d-flex justify-content-between">
+                            <div>
+                            <span className="h1">${flight.price} </span>
+                            <small className="text-muted card-text">per traveler</small>
+                            </div>
+                        
                         <button onClick={() => handleSaveTrip(flight)} className={`btn btn-success ${savedf(flight) ? '' : 'disabled'}`}>Save Trip</button>
+                        
+                        
                     
                         </div>
                         <div className="card-body container-fluid">
-                        <span className="col-md-4"> {airline[flight.validatingAirlineCodes.join(', ')]}</span>
-                        <p className="text-muted">{bool ? 'Connecting': 'Non-Stop' }</p>
+                        <h5 className="card-title"> {airline[flight.validatingAirlineCodes.join(', ')]}</h5>
+                        {/* <p className="text-muted">{bool ? 'Connecting': 'Non-Stop' }</p> */}
                         {flight.segments.map((segment, sIdx) => (
-                            <div key={sIdx} className="d-flex m-2 rounded border ">
+                            <div key={sIdx} className="d-flex m-2 rounded border tk-color ">
                                 <section className="container-fluid">
-                                <p>{new Date(segment.departureDateTime).toLocaleString()}</p>
-                                <p>Duration: {convertHM(segment.duration)}</p>
+                                <span>{new Date(segment.departureDateTime).toLocaleString()}</span>
+                                <span className="text-muted">Duration: {convertHM(segment.duration)}</span>
                                 
                                 <p>{convertIATACode(segment.originLocation.cityCode)} - {convertIATACode(segment.destinationLocation.cityCode)}</p>
                                 </section>

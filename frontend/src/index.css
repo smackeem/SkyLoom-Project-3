@@ -19,8 +19,11 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  background-color: #10101015;
 }
-
+.tk-color{
+  background-color: #10101015;
+}
 html {
   font-size: 1rem;
 }
