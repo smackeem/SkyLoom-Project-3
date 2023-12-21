@@ -8,6 +8,7 @@ const Flights = ({ allFlights }) => {
     const [savedFlights, setSavedFlights] = useState([]);
     const { isLoading: loadingAuth, isAuthenticated, user, getAccessTokenSilently } = useAuth0()
     const [token, setToken] = useState()
+    const [saved, setSaved] = useState(false);
   
     useEffect(() => {
         const getUserToken = async () => {
@@ -32,26 +33,29 @@ const Flights = ({ allFlights }) => {
         fetchData()
       }, [])
 
-      
+      const savedf = async(f) => {
+        if (savedFlights.includes(f)) {
+            return true
+          }
+      }
 
       const handleSaveTrip = async(flight) => {
         // Check if the flight is not already saved
-        console.log(user)
+        console.log(flight)
         const data = { ...flight, user: user}
-        const personData = await addToDB(data, token)
-        console.log(personData)
+        const flightData = await addToDB(data, token)
+        console.log(flightData)
         if (!savedFlights.includes(flight)) {
-          // Update the saved flights state
-          console.log(flight)
           setSavedFlights([...savedFlights, flight]);
         }
+        console.log('saved', savedFlights)
       };
       let bool;
     return (
             <div className="d-flex m-3 flex-column">
                 {allFlights.map((flight, idx) => (
                     <div key={idx} className="d-flex p-5 m-2 align-items-start flex-column rounded border ">
-                        <button onClick={() => handleSaveTrip(flight)} className="btn btn-success">Save Trip</button>
+                        <button onClick={() => handleSaveTrip(flight)} className={`btn btn-success ${savedf(flight) ? '' : 'disabled'}`}>Save Trip</button>
                         <p>Price: {flight.price}</p>
                         <p> {airline[flight.validatingAirlineCodes.join(', ')]}</p>
                             { bool = flight.segments.length > 1 ? true : false}

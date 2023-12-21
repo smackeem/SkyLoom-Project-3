@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
 import { Navigate } from "react-router";
 import { getSaved, removeSaved } from '../../utilities/flight-service';
+import Swal from 'sweetalert2';
 
 const SavedFlights = () => {
   const { isLoading: loadingAuth, isAuthenticated, user, getAccessTokenSilently } = useAuth0()
@@ -37,9 +38,24 @@ const SavedFlights = () => {
 
     const handleDelete = async(id) => {
         try{
-          const removedFlight = await removeSaved(id, token)
+          Swal.fire({
+            title: 'Are you sure?',
+            text: 'You won\'t be able to revert this!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, cancel!',
+            reverseButtons: true,
+          }).then(async (result) => {
+            if (result.isConfirmed) {
+              const removedFlight = await removeSaved(id, token)
           console.log(removedFlight)
           getUserToken()
+              Swal.fire('Deleted!', 'Your pet has been deleted.', 'success');
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+              Swal.fire('Cancelled', 'Your pet is safe :)', 'info');
+            }
+          });
         }catch(err){
           console.log(err.message)
         }

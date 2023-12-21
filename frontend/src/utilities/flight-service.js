@@ -34,10 +34,8 @@ const processFlights = (apiResponse) => {
           flightDetails.segments.push(segmentDetails);
         }
       }
-
       processedFlights.push(flightDetails);
     }
-
     return processedFlights;
 };
 
@@ -118,3 +116,11 @@ export async function removeSaved(id, token){
       return err;
       }
 }
+
+export function formatDateTime() {
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
