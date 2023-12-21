@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getRoundTrips, getOneWayFlights, formatDateTime } from "../../utilities/flight-service";
 import Flights from "../Flights";
+import ManIcon from '../../assets/images/man.png'
+import LocationIcon from '../../assets/images/location.png'
 
 const Home = () => {
     const [isRoundTrip, setIsRoundTrip] = useState(false);
@@ -65,7 +67,7 @@ const Home = () => {
     }
 
     return (
-        <div className="d-flex flex-lg-column mt-5 p-2 flex-column">
+        <div className="d-flex flex-lg-column mt-5 m-5 p-2 flex-column">
             <div className="card text-center">
                 <div className="card-header">
                     <ul className="nav nav-tabs card-header-tabs">
@@ -77,52 +79,49 @@ const Home = () => {
                         </li>
                     </ul>
                 </div>
-                <div className="card-body">
+                <div className="card-body ">
                     <form onSubmit={handleSubmit}>
-                        <div className=" d-flex form-row">
-                            <div className=" col-md-6">
+                        <div className=" d-flex m-2 row">
+                            <div className="mt-3 form-group col-auto">
                                 <label htmlFor="originLocationCode">Location</label>
-                                <input className="p-2" type="text" name="originLocationCode" value={formData.originLocationCode} onChange={handleChange} placeholder="Leaving from" />
+                                <div className="input-group-prepend"></div>
+                                <input className="p-2 form-control" type="text" name="originLocationCode" value={formData.originLocationCode} onChange={handleChange} placeholder="Leaving from" />
                             </div>
-                            <div className=" col-md-6">
+                            <div className="mt-3 form-group col-auto">
                                 <label htmlFor="destinationLocationCode">Destination</label>
-                                <input className="p-2" type="text" name="destinationLocationCode" value={formData.destinationLocationCode}  onChange={handleChange} id="" placeholder="Going to" />
+                                <div className="input-group-prepend"></div>
+                                <input className="p-2 form-control" type="text" name="destinationLocationCode" value={formData.destinationLocationCode} onChange={handleChange} id="" placeholder="Going to" />
                             </div>
-                        </div>
-                        <div className="d-flex  form-row">
-                            <div className="mt-3 col-md-6">
+
+
+                            <div className="mt-3 form-group col-auto">
                                 <label htmlFor="departureDate">Departure</label>
-                                <input className="p-2" type="date" name="departureDate" value={formData.departureDate} min={today} onChange={handleChange} />
+                                <input className="p-2 form-control" type="date" name="departureDate" value={formData.departureDate} min={today} onChange={handleChange} />
 
                             </div>
 
                             {isRoundTrip && (
-                                <div className="mt-3 col-md-4">
+                                <div className="mt-3 form-group col-auto">
                                     <label htmlFor="returnDate">Return</label>
-                                    <input className="p-2" type="date" name="returnDate" value={formData.returnDate} min={today} onChange={handleChange} />
+                                    <input className="p-2 form-control" type="date" name="returnDate" value={formData.returnDate} min={today} onChange={handleChange} />
                                 </div>
                             )}
-                            <div className="mt-3">
-                            <label htmlFor="adults">Travelers</label>
-                        <input className="p-2" type="select" name="adults" value={formData.adults} onChange={handleChange} placeholder="How Many?" />
+                            <div className="mt-3 form-group col-auto">
+                                <label htmlFor="adults">Travelers</label>
+                                <div className="input-group-prepend"></div>
+                                <input className="p-2 form-control mx-sm2" type="number" name="adults" min={1} value={formData.adults} onChange={handleChange} placeholder="How Many?" />
+                            </div>
+                            <div className="col-auto mt-3">
+                                <button className="btn btn-success" type="submit" >Find Flights</button>
                             </div>
                         </div>
-                                <div className="container mt-3">
-                                <button type="submit" >Find Flights</button>
-                                </div>
-                                <div>
-                                    input
-                                </div>
-                        
-
-
                         
                     </form>
                 </div>
 
             </div>
             <Flights allFlights={flightData} />
-                                
+
         </div>
     )
 }

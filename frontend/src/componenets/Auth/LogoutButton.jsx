@@ -4,7 +4,7 @@ export default function LogoutButton(){
   const { logout } = useAuth0();
 
   return (
-    <button
+    <button className="btn btn-danger "
       onClick={() =>
         logout({ logoutParams: { returnTo: window.location.origin } })
       }

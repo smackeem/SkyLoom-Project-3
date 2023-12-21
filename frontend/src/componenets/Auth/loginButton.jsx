@@ -11,5 +11,5 @@ export default function LoginButton(){
       });
     };
   
-    return <button onClick={handleLogin}>Log In</button>;
+    return <button className="btn btn-success" onClick={handleLogin}>Log In</button>;
   }

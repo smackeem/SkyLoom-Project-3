@@ -7,25 +7,23 @@ import './Header.css'
 const Header = () => {
     const { user, isAuthenticated, isLoading } = useAuth0();
     return (
-        <nav className="navbar navbar-dark bg-dark sticky-top">
+        <nav className="p-4 navbar navbar-dark bg-dark sticky-top">
             <div id='nav-tab'>
-            <Link className="navbar-brand" to="/">SkyLoom</Link>
+                <Link className="navbar-brand" to="/">SkyLoom</Link>
             </div>
-            
-            
-            
+
             <div id='nav-tab'>
-        {!isLoading ? (
-          isAuthenticated ? (
-            <span>
-                <Link to="/saved">Saved Flights</Link>
-              <Link to="/profile"><img className="img" src={user.picture} alt={""} /></Link>
-               <LogoutButton />
-            </span>
-          ) : (
-            <LoginButton />
-          )
-        ) : null}
+                {!isLoading ? (
+                    isAuthenticated ? (
+                        <div>
+                            <Link className="p-2" to="/saved">Saved Flights</Link>
+                            <Link className="p-2" to="/profile"><img className="img rounded-circle" src={user.picture} alt={""} /></Link>
+                            <LogoutButton />
+                        </div>
+                    ) : (
+                        <LoginButton />
+                    )
+                ) : null}
             </div>
         </nav>
     )

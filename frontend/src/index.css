@@ -24,6 +24,9 @@ body {
 .tk-color{
   background-color: #10101015;
 }
+.icon{
+  size: .5rem;
+}
 html {
   font-size: 1rem;
 }
