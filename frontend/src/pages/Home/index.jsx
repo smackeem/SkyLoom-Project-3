@@ -121,8 +121,8 @@ const Home = () => {
                 </div>
 
             </div>
-            <div className="card m-3 text-center"><Flights allFlights={flightData} /> </div>
-
+            <Flights allFlights={flightData} />
+                                
         </div>
     )
 }

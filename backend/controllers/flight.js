@@ -3,7 +3,8 @@ const Flight = require('../models/flight');
 module.exports = {
     create,
     index,
-    delete: destroy
+    delete: destroy,
+    show
 }
 
 async function index(req, res, next){
@@ -40,5 +41,13 @@ async function destroy(req, res, next){
         res.status(200).json(await Flight.findByIdAndDelete(req.params.id));
     }catch(err){
         res.status(400).json({err: err.message})
+    }
+}
+
+async function show(req, res, next){
+    try{
+        res.status(200).json(await Flight.findById(req.params.id))
+    }catch(err){
+        res.status(400).json({err: err.message});
     }
 }

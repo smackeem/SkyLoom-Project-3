@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react"
-import { getPricing } from "../../utilities/flight-service";
+import { convertHM, convertIATACode} from "../../utilities/flight-service";
 import { addToDB } from "../../utilities/flight-service";
 
 const Flights = ({ allFlights }) => {
@@ -52,23 +52,39 @@ const Flights = ({ allFlights }) => {
       };
       let bool;
     return (
+        
             <div className="d-flex m-3 flex-column">
                 {allFlights.map((flight, idx) => (
-                    <div key={idx} className="d-flex p-5 m-2 align-items-start flex-column rounded border ">
+                    <div key={idx} className="card ">
+                        { bool = flight.segments.length > 1 ? true : false}
+                        <div className="card-header">
+                        <span className="h1">${flight.price}</span>
                         <button onClick={() => handleSaveTrip(flight)} className={`btn btn-success ${savedf(flight) ? '' : 'disabled'}`}>Save Trip</button>
-                        <p>Price: {flight.price}</p>
-                        <p> {airline[flight.validatingAirlineCodes.join(', ')]}</p>
-                            { bool = flight.segments.length > 1 ? true : false}
+                    
+                        </div>
+                        <div className="card-body container-fluid">
+                        <span className="col-md-4"> {airline[flight.validatingAirlineCodes.join(', ')]}</span>
+                        <p className="text-muted">{bool ? 'Connecting': 'Non-Stop' }</p>
                         {flight.segments.map((segment, sIdx) => (
-                            <div key={sIdx} className="d-flex card-group m-2 align-items-start rounded border ">
-                                <section className="card">
+                            <div key={sIdx} className="d-flex m-2 rounded border ">
+                                <section className="container-fluid">
                                 <p>{new Date(segment.departureDateTime).toLocaleString()}</p>
-                                <p>Duration: {segment.duration}</p>
-                                <p className="text-muted">{bool ? 'Non-Stop' : 'Connecting'}</p>
-                                <p>{segment.originLocation.cityCode} - {segment.destinationLocation.cityCode}</p>
+                                <p>Duration: {convertHM(segment.duration)}</p>
+                                
+                                <p>{convertIATACode(segment.originLocation.cityCode)} - {convertIATACode(segment.destinationLocation.cityCode)}</p>
                                 </section>
+            
                                 </div>
+                                
                         ))}
+                        </div>
+                        
+                        
+                        
+                        
+                        
+                            
+                        
 
                     </div>
                 ))}

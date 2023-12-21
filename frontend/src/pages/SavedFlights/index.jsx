@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
 import { Navigate } from "react-router";
-import { getSaved, removeSaved } from '../../utilities/flight-service';
+import { getSaved, removeSaved, convertHM } from '../../utilities/flight-service';
 import Swal from 'sweetalert2';
 
 const SavedFlights = () => {
@@ -51,9 +51,9 @@ const SavedFlights = () => {
               const removedFlight = await removeSaved(id, token)
           console.log(removedFlight)
           getUserToken()
-              Swal.fire('Deleted!', 'Your pet has been deleted.', 'success');
+              Swal.fire('Deleted!', 'Flight deleted!', 'success');
             } else if (result.dismiss === Swal.DismissReason.cancel) {
-              Swal.fire('Cancelled', 'Your pet is safe :)', 'info');
+              Swal.fire('Cancelled', 'Flight is save!', 'info');
             }
           });
         }catch(err){
@@ -71,17 +71,20 @@ const SavedFlights = () => {
 
                 <p>Price: {flight.price}</p>
                 <p> {airlines[flight.validatingAirlineCodes.join(', ')]}</p>
+                <div className='d-flex'>
+
+                
                 {flight.segments.map((segment, sIdx) => (
                     <div key={sIdx} className="d-flex card-group m-2 align-items-start rounded border ">
                         <section className="card">
                         <p>{new Date(segment.departureDateTime).toLocaleString()}</p>
-                        <p>Duration: {segment.duration}</p>
+                        <p>Duration: {convertHM(segment.duration)}</p>
                         <p className="text-muted">{segment.isNonStop ? 'Non-Stop' : 'Connecting'}</p>
                         <p>{segment.originLocation.cityCode} - {segment.destinationLocation.cityCode}</p>
                         </section>
                         </div>
                 ))}
-
+                </div>
             </div>
         ))
           ) : (

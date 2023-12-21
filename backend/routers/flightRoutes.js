@@ -19,6 +19,8 @@ router.get("/saved", flightCtrl.index);
 
 router.post("/", flightCtrl.create);
 
+router.get("/:id", flightCtrl.show);
+
 router.delete("/:id", flightCtrl.delete);
 
 module.exports = router;

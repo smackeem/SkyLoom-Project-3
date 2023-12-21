@@ -1,4 +1,5 @@
 import * as flightAPI from './flight-api'
+import airportData from '../assets/airports.json'
 
 const processFlights = (apiResponse) => {
     const processedFlights = [];
@@ -6,7 +7,7 @@ const processFlights = (apiResponse) => {
     for (const flight of apiResponse.data) {
       const itineraries = flight.itineraries;
       const price = `${flight.price.total} ${flight.price.currency}`;
-      const validatingAirlineCodes = flight.validatingAirlineCodes;
+      const validatingAirlineCodes = flight.validatingAirlineCodes; 
 
       const flightDetails = {
         price,
@@ -123,4 +124,23 @@ export function formatDateTime() {
     const month = (date.getMonth() + 1).toString().padStart(2, '0');
     const day = date.getDate().toString().padStart(2, '0');
     return `${year}-${month}-${day}`;
+  }
+
+export function convertHM(duration) {
+    const match = duration.match(/PT(\d+H)?(\d+M)?/);
+  
+    const hours = match[1] ? parseInt(match[1], 10) : 0;
+    const minutes = match[2] ? parseInt(match[2], 10) : 0;
+  
+    const formattedTime = `${hours}h ${minutes}m`;
+    return formattedTime;
+  }
+
+  export function convertIATACode(iata){
+    const airportInfo = airportData[iata];
+    if (airportInfo) {
+      return `${airportInfo} (${iata})`;
+    } else {
+      return 'Airport not found for the given IATA code.';
+    }
   }
