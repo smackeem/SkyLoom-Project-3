@@ -8,14 +8,18 @@ const processFlights = (apiResponse) => {
       const itineraries = flight.itineraries;
       const price = `${flight.price.total} ${flight.price.currency}`;
       const validatingAirlineCodes = flight.validatingAirlineCodes; 
-
+      const numberOfBookableSeats = flight.numberOfBookableSeats
+      
       const flightDetails = {
         price,
+        numberOfBookableSeats,
+        itineraries,
         validatingAirlineCodes,
         segments: [],
       };
 
       for (const itinerary of itineraries) {
+        
         const segments = itinerary.segments;
 
         for (const segment of segments) {
@@ -31,7 +35,7 @@ const processFlights = (apiResponse) => {
             originLocation: apiResponse.dictionaries.locations[departure.iataCode],
             destinationLocation: apiResponse.dictionaries.locations[arrival.iataCode],
           };
-
+          
           flightDetails.segments.push(segmentDetails);
         }
       }
@@ -118,6 +122,17 @@ export async function removeSaved(id, token){
       }
 }
 
+export async function getDetails(id, token){
+  try{
+      console.log('data being passed',id)
+      const detail = await flightAPI.details(id, token)
+      return detail;
+    }catch(err){
+    console.log(err)
+    return err;
+    }
+}
+
 export function formatDateTime() {
     const date = new Date();
     const year = date.getFullYear();
@@ -141,6 +156,6 @@ export function convertHM(duration) {
     if (airportInfo) {
       return `${airportInfo} (${iata})`;
     } else {
-      return 'Airport not found for the given IATA code.';
+      return iata;
     }
   }

@@ -4,6 +4,7 @@ import { Navigate } from "react-router";
 import {RotatingLines} from "react-loader-spinner";
 import { getSaved, removeSaved, convertHM, convertIATACode } from '../../utilities/flight-service';
 import Swal from 'sweetalert2';
+import { Link } from "react-router-dom";
 
 const SavedFlights = () => {
   const { isLoading: loadingAuth, isAuthenticated, user, getAccessTokenSilently } = useAuth0()
@@ -23,6 +24,7 @@ const SavedFlights = () => {
     try {
       const accessToken = await getAccessTokenSilently();
       setToken(accessToken);
+      localStorage.setItem('token', JSON.stringify(accessToken))
       const flightData = await getSaved(user?.email, accessToken);
       setSavedFlights(flightData);
       setIsloading(false)
@@ -32,7 +34,9 @@ const SavedFlights = () => {
   };
 
   useEffect(() => {
-    isAuthenticated && getUserToken() && fetchData(); 
+
+    isAuthenticated && getUserToken() && fetchData();
+    
   }, [user?.sub]);
 
   if (!isAuthenticated) {
@@ -67,10 +71,10 @@ const SavedFlights = () => {
           console.log(err.message)
         }
     }
-  
+  console.log('local storage, ', localStorage)
     const loaded = () =>{
       return(
-        <div className="d-flex mt-3 flex-column ">
+        <div className="d-flex mt-5 m-5 p-2 flex-column ">
           {token && savedFlights.length > 0 ? (
         savedFlights?.map((flight, idx) => (
           <div key={idx} className="card mt-3 border border-dark">
@@ -95,6 +99,9 @@ const SavedFlights = () => {
                             </div>
                         ))}
                 </div>
+                {/* <div className="card-footer text-muted text-center">
+    <Link to={`/saved/${flight._id}`}>More Details</Link>
+  </div> */}
             </div>
         ))
           ) : (

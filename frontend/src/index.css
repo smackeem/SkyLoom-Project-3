@@ -14,6 +14,9 @@ a {
   color: none;
   text-decoration: inherit;
 }
+.accent{
+  color: #198754;
+}
 
 body {
   margin: 0;

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
 import { convertHM, convertIATACode } from "../../utilities/flight-service";
 
@@ -22,7 +23,7 @@ const FlightItem = ({ flight, handleSaveTrip, notSaved }) => {
                             <span className="h3">${flight.price} </span>
                             <small className="text-muted card-text">per traveler</small>
                         </div>
-                        <button onClick={() => handleSaveTrip(flight)} className={`btn btn-success ${notSaved(flight) ? '' : 'disabled'}`}>Save Trip</button>
+                        <button onClick={() => handleSaveTrip(flight)} className={`btn btn-success ${notSaved(flight) ? '' : 'disabled'}`}>&#9825;</button>
                     </div>
                     <div className="card-body container-fluid">
                         <h5 className="card-title"> {airline[flight.validatingAirlineCodes.join(', ')]}</h5>

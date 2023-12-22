@@ -76,3 +76,14 @@ export async function createDB(data, token){
     throw new Error("Invalid Request")
   }
 }
+
+export async function details(id, token){
+  const url = `${config.DB_URL}/flights/${id}`;
+  const res = await fetch(url, {method: "GET",
+  headers: {'Authorization': `Bearer ${token}`}});
+  if(res.ok){
+    return res.json();
+  }else{
+  throw new Error("Invalid Request")
+}
+}
