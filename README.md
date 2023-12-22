@@ -19,12 +19,12 @@
 </details>
 
 ## About The Project
-SkyLoom is a seamless and intuitive Flight Price Tracker application that helps users monitor and receive alerts for changes in flight prices. Whether you're a budget-conscious traveler or planning your dream vacation, FlySaver keeps you informed, saving you time and money.
+SkyLoom is a seamless and intuitive Flight Finder application that helps users find the cheapest flights for travel. Whether you're a budget-conscious traveler or planning your dream vacation, SkyLoom keeps you informed, saving you time and money.
 
 ## Screenshots and Wireframe
-<img width="1391" alt="Screenshot 2023-12-22 at 12 55 45 AM" src="https://github.com/smackeem/SkyLoom-Project-3/assets/43871798/6d14f116-ca44-44da-a725-939db0d961bd">
-<img width="1377" alt="Screenshot 2023-12-22 at 12 56 28 AM" src="https://github.com/smackeem/SkyLoom-Project-3/assets/43871798/9cac28d2-6999-4c73-ab5e-2774ce859ec2">
-<img width="1378" alt="Screenshot 2023-12-22 at 1 23 06 AM" src="https://github.com/smackeem/SkyLoom-Project-3/assets/43871798/afb21d3d-e932-47ce-8442-9bc7c31e924c">
+<img width="1050" height="auto" alt="Screenshot 2023-12-22 at 12 55 45 AM" src="https://github.com/smackeem/SkyLoom-Project-3/assets/43871798/6d14f116-ca44-44da-a725-939db0d961bd">
+<img width="1050" alt="Screenshot 2023-12-22 at 12 56 28 AM" src="https://github.com/smackeem/SkyLoom-Project-3/assets/43871798/9cac28d2-6999-4c73-ab5e-2774ce859ec2">
+<img width="1050" alt="Screenshot 2023-12-22 at 1 23 06 AM" src="https://github.com/smackeem/SkyLoom-Project-3/assets/43871798/afb21d3d-e932-47ce-8442-9bc7c31e924c">
 
 
 ## Technologies Used
@@ -35,7 +35,7 @@ SkyLoom is a seamless and intuitive Flight Price Tracker application that helps 
 
 
 ## Getting Started
-🚀 Explore the Sky with me: 
+🚀 Explore the Sky with me: https://fascinating-melomakarona-16bbb7.netlify.app/
 
 * View my Trello Board: [https://tinyurl.com/479yud33](https://trello.com/b/Bufs8Cqj/skyhigh)
 
@@ -47,6 +47,7 @@ SkyLoom is a seamless and intuitive Flight Price Tracker application that helps 
   <li>User Preferences: Customize your experience with preferences like preferred airlines and layover durations.</li>
   <li>Dashboard: View all your tracked flights and upcoming departures in one user-friendly dashboard.</li>
 </ul>
+
    
 ## Next Steps and Future Enhancements
 <ul>
@@ -55,6 +56,11 @@ SkyLoom is a seamless and intuitive Flight Price Tracker application that helps 
     <li>Real-Time Notifications: Send users real-time notifications when a tracked flight's price drops below set threshold.</li>
   <li>Price Alerts: Set personalized price alerts and receive notifications when prices drop.</li>
 </ul>
+
+
+## Acknowledgements
+This project relies on the Amadeus API for accurate and up-to-date flight information.
+
 
 ## Contact
 Ackeem Smith </br>
