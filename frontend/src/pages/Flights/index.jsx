@@ -7,7 +7,7 @@ import {RotatingLines} from "react-loader-spinner";
 
 const Flights = ({ allFlights, status, tripStat }) => {
     const [savedFlights, setSavedFlights] = useState([]);
-    const { isAuthenticated, user, getAccessTokenSilently, loginWithPopup } = useAuth0()
+    const { isAuthenticated, user, getAccessTokenSilently, loginWithRedirect } = useAuth0()
     const [token, setToken] = useState()
 
     useEffect(() => {
@@ -25,7 +25,7 @@ const Flights = ({ allFlights, status, tripStat }) => {
 
     const handleSaveTrip = async (flight) => {
         if (!isAuthenticated) {
-            loginWithPopup();
+            loginWithRedirect();
             return;
         }
         console.log(flight)

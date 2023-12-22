@@ -13,8 +13,7 @@ const Header = () => {
             </div>
 
             <div id='nav-tab'>
-                {!isLoading ? (
-                    isAuthenticated ? (
+                {isAuthenticated ? (
                         <div>
                             <Link className=" btn btn-success" to="/saved">&#9825; Saved</Link>
                             <Link className="p-2 " to="/profile"><img className="img rounded-circle" src={user.picture} alt={""} /></Link>
@@ -23,7 +22,7 @@ const Header = () => {
                     ) : (
                         <LoginButton />
                     )
-                ) : null}
+                }
             </div>
         </nav>
     )
