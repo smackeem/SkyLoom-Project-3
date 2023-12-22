@@ -29,8 +29,12 @@ SkyLoom is a seamless and intuitive Flight Finder application that helps users f
 
 ## Technologies Used
 <ul>
-  <li>Frontend: Built with React for a responsive and interactive user interface.</li>
+  <li>Frontend: Built with React for a responsive and interactive user interface, utilizing Bootstrap for styling.</li>
   <li>Backend: Powered by Node.js and Express, with data stored in MongoDB.</li>
+  <li>Authentication: Implemented with Auth0 for secure user authentication.</li>
+  <li>Alerts: Integrated with SweetAlert for personalized price alerts.</li>
+  <li>API: Utilizes the Amadeus API for flight information.</li>
+  <li>Tokenization: Implemented JSON Web Token (JWT) for secure communication.</li>
 </ul>
 
 
