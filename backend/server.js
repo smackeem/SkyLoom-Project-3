@@ -12,7 +12,7 @@ const amadeusAPIRouter = require('./routers/amadeus');
 const {PORT} = process.env;
 
 app.get('/', (req, res)=> {
-    res.send("Hello world");
+    res.send("https://fascinating-melomakarona-16bbb7.netlify.app/");
 });
 
 app.use(express.json());

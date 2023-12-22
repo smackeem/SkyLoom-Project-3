@@ -13,7 +13,7 @@ async function getRoudTrip(req, res, next) {
       returnDate,
       adults,
       max,
-      currencyCode
+      currencyCode,
     } = req.body;
     const url = `https://test.api.amadeus.com/v2/shopping/flight-offers?originLocationCode=${originLocationCode}&destinationLocationCode=${destinationLocationCode}&departureDate=${departureDate}&returnDate=${returnDate}&adults=${adults}&nonStop=false&currencyCode=${currencyCode}&max=${max}`;
     const response = await fetch(url, {
@@ -45,7 +45,7 @@ async function getOneWayTrip(req, res, next) {
       destinationLocationCode,
       departureDate,
       adults,
-      max
+      max,
     } = req.body;
     console.log(req.body);
     const url = `https://test.api.amadeus.com/v2/shopping/flight-offers?originLocationCode=${originLocationCode}&destinationLocationCode=${destinationLocationCode}&departureDate=${departureDate}&adults=${adults}&max=${max}`;
