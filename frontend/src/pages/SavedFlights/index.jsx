@@ -75,6 +75,7 @@ const SavedFlights = () => {
     const loaded = () =>{
       return(
         <div className="d-flex mt-5 m-5 p-2 flex-column ">
+          <h1 className='text-center'>Saved Flights</h1>
           {token && savedFlights.length > 0 ? (
         savedFlights?.map((flight, idx) => (
           <div key={idx} className="card mt-3 border border-dark">
